@@ -37,7 +37,25 @@ Below is a minimal example of an AGENTS.md file:
 ## Website
 
 This repository also includes a basic Next.js website hosted at https://agents.md/
-that explains the project’s goals in a simple way, and featuring some examples.
+that explains the project's goals in a simple way, and featuring some examples.
+
+## AGENTS.ARCH.md
+
+This repository includes an experimental extension to AGENTS.md called `AGENTS.ARCH.md`, 
+which focuses on architectural integrity for AI-assisted development. While AGENTS.md 
+provides development workflow guidance, AGENTS.ARCH.md adds architectural awareness 
+and safety constraints to ensure agents understand system boundaries and maintain 
+existing patterns when making changes.
+
+Key features of AGENTS.ARCH.md:
+- **System Image Declaration (SID)**: Structured system summary for agent awareness
+- **Safe Generation Defaults**: Non-destructive changes with explicit permission requirements
+- **Agent Snapshot Protocol**: Structured understanding verification
+- **Violation Logging**: Clear reporting of constraint breaches
+- **Architectural Pattern Enforcement**: Maintains existing design patterns
+
+This is an experimental specification designed for complex, interdependent codebases 
+where architectural integrity is critical.
 
 ### Running the app locally
 1. Install dependencies:
