@@ -74,7 +74,9 @@ export default function FAQ() {
           <div className="w-full flex justify-center">
             <CodeExample
               code='{
-  "contextFileName": "AGENTS.md"
+"context": {
+"fileName": "AGENTS.md"
+}
 }'
               compact
               heightClass="min-h-[48px]"
