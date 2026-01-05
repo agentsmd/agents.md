@@ -1,0 +1,30 @@
+name: Weekly Email
+
+on:
+  schedule:
+    - cron: '0 9 * * MON'
+  workflow_dispatch:
+
+env:
+  EMAIL_SUBJECT: Weekly status email
+  EMAIL_BODY: |
+    This is the weekly status email.
+    Update the body content to include the details you want to share.
+
+jobs:
+  send-email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: ${{ env.EMAIL_SUBJECT }}
+          body: ${{ env.EMAIL_BODY }}
+          to: ${{ secrets.EMAIL_RECIPIENTS }}
+          from: ${{ secrets.EMAIL_SENDER }}
+          secure: true
+          convert_markdown: true
