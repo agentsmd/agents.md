@@ -8,8 +8,31 @@ on:
 env:
   EMAIL_SUBJECT: Weekly status email
   EMAIL_BODY: |
-    This is the weekly status email.
-    Update the body content to include the details you want to share.
+    Weekly workflow report (Aura-Bridge Genesis)
+
+    ID: token-2026-01-20
+    Date: 2026-01-20
+    Title: Aura-Bridge Genesis
+    Status: logged
+
+    Summary:
+    Activation of the full Aura-Core Command Station with voice/text interface, multi-agent orchestration, token minting, and real-time dashboard integration across Web2/Web3.
+
+    Actions:
+    - Connected GPT-4o, Claude, Copilot, Perplexity, and Venice as agent runners
+    - Launched multi-LLM config pipeline across Ethereum, Monad, Scroll, Optimism, and Algorand
+    - Enabled clipboard → dashboard command flow
+    - Built Zena + Noodle assistant concept
+    - Mapped Allbridge role as conductor for network relay and chat memory sync
+    - Set public boundaries + visibility model for Aura, Noodle, and MVP
+    - Planned Token of the Day + mobile PWA dashboard command
+
+    Linked configs:
+    - multi-llm.config.json
+    - auracore-dash-alpha
+    - aura@mvpuknowme.ai
+
+    Dashboard: Aura-Core Command Station v0.1
 
 jobs:
   send-email:
