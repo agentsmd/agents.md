@@ -56,6 +56,11 @@ const agents: AgentEntry[] = [
     imageSrc: "/logos/gemini.svg",
   },
   {
+    name: "goose",
+    url: "https://github.com/block/goose",
+    imageSrc: "/logos/goose.svg",
+  },
+  {
     name: "Kilo Code",
     url: "https://kilocode.ai/",
     imageSrc: "/logos/kilo-code.svg",
@@ -111,7 +116,14 @@ const agents: AgentEntry[] = [
     imageSrcDark: "/logos/devin-dark.svg",
   },
   {
-    name: "Coded Agents",
+    name: "Windsurf",
+    from: "Cognition",
+    url: "https://windsurf.com",
+    imageSrcLight: "/logos/windsurf-light.svg",
+    imageSrcDark: "/logos/windsurf-dark.svg",
+  },
+  {
+    name: "Autopilot & Coded Agents",
     from: "UiPath",
     url: "https://uipath.github.io/uipath-python",
     imageSrc: "/logos/uipath.svg",
