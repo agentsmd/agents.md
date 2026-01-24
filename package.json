@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@octokit/request": "^10.0.5",
     "@tailwindcss/postcss": "4.1.11",
     "@vercel/analytics": "^1.5.0",
     "next": "16.1.0",

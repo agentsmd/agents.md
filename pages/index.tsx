@@ -9,6 +9,7 @@ import CompatibilitySection from "@/components/CompatibilitySection";
 import { GetStaticProps } from "next";
 import WhySection from "@/components/WhySection";
 import AboutSection from "@/components/AboutSection";
+import { request } from "@octokit/request";
 
 interface LandingPageProps {
   contributorsByRepo: Record<string, { avatars: string[]; total: number }>;
@@ -47,11 +48,11 @@ let cachedContributors:
 export const getStaticProps: GetStaticProps<LandingPageProps> = async () => {
   // List of repositories displayed in ExampleListSection. Keep in sync with
   // the REPOS constant in that component.
-  const repoNames = [
-    "openai/codex",
-    "apache/airflow",
-    "temporalio/sdk-java",
-    "PlutoLang/Pluto",
+  const repositories: { owner: string; repo: string }[] = [
+    { owner: "openai", repo: "codex" },
+    { owner: "apache", repo: "airflow" },
+    { owner: "temporalio", repo: "sdk-java" },
+    { owner: "PlutoLang", repo: "Pluto" },
   ];
 
   // If we fetched within the last 12 hours, reuse the cached data.
@@ -93,54 +94,60 @@ export const getStaticProps: GetStaticProps<LandingPageProps> = async () => {
     baseHeaders["Authorization"] = `Bearer ${process.env.GH_AUTH_TOKEN}`;
   }
 
-  for (const fullName of repoNames) {
+  for (const { owner, repo } of repositories) {
+    const repository = `${owner}/${repo}`;
     try {
       // Fetch top 3 contributor avatars
-      const avatarsRes = await fetch(
-        `https://api.github.com/repos/${fullName}/contributors?per_page=3`,
+      const { data: avatarsData } = await request(
+        "GET /repos/{owner}/{repo}/contributors",
         {
+          owner,
+          repo,
+          per_page: 3,
           headers: baseHeaders,
         }
       );
 
-      const avatarsData = avatarsRes.ok
-        ? ((await avatarsRes.json()) as Array<{ avatar_url: string }>)
-        : [];
-
-      const avatars = avatarsData.slice(0, 3).map((c) => c.avatar_url);
+      const avatars = avatarsData
+        .slice(0, 3)
+        .map((c) => c.avatar_url)
+        .filter((url): url is string => url !== undefined);
 
       // Fetch contributor count (using per_page=1 to inspect Link header)
       let total = avatarsData.length; // fallback
       try {
-        const countRes = await fetch(
-          `https://api.github.com/repos/${fullName}/contributors?per_page=1&anon=1`,
+        const countRes = await request(
+          "GET /repos/{owner}/{repo}/contributors",
           {
+            owner,
+            repo,
+            per_page: 1,
+            anon: "1",
             headers: baseHeaders,
           }
         );
 
-        const link = countRes.headers.get("link");
+        const link = countRes.headers.link;
         if (link && /rel="last"/.test(link)) {
           const match = link.match(/&?page=(\d+)>; rel="last"/);
           if (match?.[1]) {
             total = parseInt(match[1], 10);
           }
         } else {
-          const oneData = countRes.ok ? ((await countRes.json()) as any[]) : [];
-          total = oneData.length;
+          total = countRes.data.length;
         }
       } catch {
         // ignore errors, keep fallback
-        console.error(`Error fetching contributors for ${fullName}`);
+        console.error(`Error fetching contributors for ${repository}`);
       }
 
-      contributorsByRepo[fullName] = {
+      contributorsByRepo[repository] = {
         avatars,
         total,
       };
     } catch {
-      console.error(`Error fetching contributors for ${fullName}`);
-      contributorsByRepo[fullName] = { avatars: [], total: 0 };
+      console.error(`Error fetching contributors for ${repository}`);
+      contributorsByRepo[repository] = { avatars: [], total: 0 };
     }
   }
 
