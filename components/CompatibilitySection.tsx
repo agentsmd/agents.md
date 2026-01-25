@@ -24,6 +24,12 @@ const agents: AgentEntry[] = [
     imageSrc: "/logos/amp.svg",
   },
   {
+    name: "Autohand",
+    url: "https://autohand.ai/cli",
+    imageSrcLight: "/logos/autohand-light.svg",
+    imageSrcDark: "/logos/autohand-dark.svg",
+  },
+  {
     name: "Jules",
     url: "https://jules.google",
     from: "Google",
@@ -278,7 +284,7 @@ export default function CompatibilitySection() {
       },
       {
         threshold: 0,
-      }
+      },
     );
 
     observer.observe(node);
