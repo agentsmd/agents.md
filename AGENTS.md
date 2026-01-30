@@ -1,43 +1,97 @@
-# AGENTS Guidelines for This Repository
+# AGENTS.md — Working Agreement (Next.js + pnpm + Windows)
 
-This repository contains a Next.js application located in the root of this repository. When
-working on the project interactively with an agent (e.g. the Codex CLI) please follow
-the guidelines below so that the development experience – in particular Hot Module
-Replacement (HMR) – continues to work smoothly.
+This repo is a **Next.js** app in the **repo root** (Pages Router via `pages/`).
+Goal: keep the dev loop fast, avoid lockfile churn, and prevent Windows/Turbopack pain.
 
-## 1. Use the Development Server, **not** `npm run build`
+## 0) Golden rules
 
-* **Always use `npm run dev` (or `pnpm dev`, `yarn dev`, etc.)** while iterating on the
-  application.  This starts Next.js in development mode with hot-reload enabled.
-* **Do _not_ run `npm run build` inside the agent session.**  Running the production
-  build command switches the `.next` folder to production assets which disables hot
-  reload and can leave the development server in an inconsistent state.  If a
-  production build is required, do it outside of the interactive agent workflow.
+- Use **pnpm** only (avoid `package-lock.json` churn).
+- Prefer `pnpm dev` for iteration. Avoid `pnpm build` during agent sessions.
+- On Windows, if Turbopack panics/loops, use **webpack dev** (`--webpack`).
 
-## 2. Keep Dependencies in Sync
+## 1) Setup (Windows)
 
-If you add or update dependencies remember to:
+From repo root:
 
-1. Update the appropriate lockfile (`package-lock.json`, `pnpm-lock.yaml`, `yarn.lock`).
-2. Re-start the development server so that Next.js picks up the changes.
+- Enable Corepack (one-time): `corepack enable`
+- Pin pnpm (repo expects): `corepack prepare pnpm@9.15.1 --activate`
+- Install deps: `pnpm install`
 
-## 3. Coding Conventions
+If the repo folder is renamed/moved:
 
-* Prefer TypeScript (`.tsx`/`.ts`) for new components and utilities.
-* Co-locate component-specific styles in the same folder as the component when
-  practical.
+- `rm -rf node_modules`
+- `pnpm install`
 
-## 4. Useful Commands Recap
+## 2) Dev loop
 
-| Command            | Purpose                                            |
-| ------------------ | -------------------------------------------------- |
-| `npm run dev`      | Start the Next.js dev server with HMR.             |
-| `npm run lint`     | Run ESLint checks.                                 |
-| `npm run test`     | Execute the test suite (if present).               |
-| `npm run build`    | **Production build – _do not run during agent sessions_** |
+Start:
 
----
+- `pnpm dev`
 
-Following these practices ensures that the agent-assisted development workflow stays
-fast and dependable.  When in doubt, restart the dev server rather than running the
-production build.
+Open:
+
+- <http://localhost:3000>
+
+If Fast Refresh feels stuck:
+
+- Stop server (Ctrl+C)
+- Restart: `pnpm dev`
+
+## 3) Windows gotchas
+
+### A) Symlink privilege (os error 1314)
+
+If you see “required privilege not held” / `os error 1314`:
+
+- Enable **Windows Developer Mode**
+  - Settings → System → For developers → Developer Mode = ON
+- Restart `pnpm dev`
+
+### B) Turbopack panic loops
+
+If you see repeated:
+
+- `FATAL: An unexpected Turbopack error occurred`
+- `next-panic-*.log` written
+
+Use webpack dev:
+
+- One-off: `pnpm exec next dev --webpack`
+- Recommended: set `package.json` dev script to `next dev --webpack`
+
+### C) File I/O benchmark warning (os error 3)
+
+If you see: “Failed to benchmark file I/O (os error 3)”
+and it correlates with Turbopack instability:
+
+- use webpack dev (`--webpack`)
+
+## 4) Lint
+
+Run:
+
+- `pnpm exec next lint`
+
+(If you see “Invalid project directory …\lint”, double-check you are in repo root.)
+
+## 5) Dependency & lockfile rules
+
+- If deps change, `pnpm-lock.yaml` must change.
+- Do not delete `pnpm-lock.yaml` unless explicitly instructed.
+- After dep changes, restart dev server.
+
+## 6) Where things live
+
+- Pages/routes: `pages/`
+- Components: `components/`
+- Styles: `styles/`
+- Static assets: `public/`
+- Next config: `next.config.ts`
+- TS config: `tsconfig.json`
+- This doc: `AGENTS.md`
+
+## 7) Agent workflow expectations
+
+- Keep diffs small and scoped.
+- Ask before installing/updating deps.
+- After changes: show `git status -sb` and a 3-bullet diff summary.
