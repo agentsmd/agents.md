@@ -21,6 +21,9 @@ Primary goal: keep the dev loop **fast + boring**, avoid lockfile churn, and pre
 - [Linting](#linting)
 - [Dependencies & lockfile rules](#dependencies--lockfile-rules)
 - [Project map](#project-map)
+- [Task-specific docs pointers](#task-specific-docs-pointers)
+- [Verification](#verification)
+- [Dont do this guardrails](#dont-do-this-guardrails)
 - [Agent workflow expectations](#agent-workflow-expectations)
 - [Troubleshooting checklist](#troubleshooting-checklist)
 
@@ -238,6 +241,33 @@ Agent rule:
 - TypeScript env: `next-env.d.ts`
 - TS config: `tsconfig.json`
 - This doc: `AGENTS.md`
+
+---
+
+## Task-specific docs pointers
+
+- For UI/component changes, start with `docs/ui.md`.
+- For accessibility pass/fail checks, use `docs/a11y.md`.
+- For Windows-local development issues, use `docs/windows-dev.md`.
+- Use progressive discovery: open only the task-relevant doc first, then expand scope only if blocked.
+
+---
+
+## Verification
+
+Run this from repo root before handoff:
+
+```bash
+pnpm -s lint && pnpm -s typecheck && pnpm -s build
+```
+
+---
+
+## Dont do this guardrails
+
+- **pnpm only** for installs and scripts.
+- **Never create or modify lockfiles** (`pnpm-lock.yaml`, `package-lock.json`, `yarn.lock`) unless explicitly requested.
+- **Ask before changing dependencies or tooling** (including Next.js, React, lint/build tooling).
 
 ---
 
