@@ -1,5 +1,6 @@
+// File: /components/CodeExample.tsx
+
 import React from "react";
-import ClipboardIcon from "./icons/ClipboardIcon";
 import CopyIcon from "./icons/CopyIcon";
 
 interface CodeExampleProps {
@@ -77,24 +78,23 @@ function parseMarkdown(md: string): React.ReactNode[] {
           {line}
         </div>
       );
-    } else if (line.startsWith("- ")) {
-      // Handle list items with inline code
-      elements.push(
-        <div key={i}>
-          {renderLineWithInlineCode(line)}
-        </div>
-      );
-    } else if (line.trim() === "") {
-      // Handle empty lines
-      elements.push(<div key={i}>&nbsp;</div>);
-    } else {
-      // Handle regular lines with inline code
-      elements.push(
-        <div key={i}>
-          {renderLineWithInlineCode(line)}
-        </div>
-      );
+      continue;
     }
+
+    // Handle list items with inline code
+    if (line.startsWith("- ")) {
+      elements.push(<div key={i}>{renderLineWithInlineCode(line)}</div>);
+      continue;
+    }
+
+    // Handle empty lines
+    if (line.trim() === "") {
+      elements.push(<div key={i}>&nbsp;</div>);
+      continue;
+    }
+
+    // Handle regular lines with inline code
+    elements.push(<div key={i}>{renderLineWithInlineCode(line)}</div>);
   }
 
   return elements;
@@ -108,14 +108,12 @@ function renderLineWithInlineCode(line: string): React.ReactNode {
 
   return parts.map((part, index) => {
     if (part.startsWith("`") && part.endsWith("`")) {
-      // This is inline code
       return (
-        <span key={index} className="bg-gray-200 dark:bg-gray-800 px-1 rounded">
+        <span key={index} className="rounded bg-gray-200 px-1 dark:bg-gray-800">
           {part}
         </span>
       );
     }
-    // Regular text
     return part;
   });
 }
@@ -137,57 +135,55 @@ export default function CodeExample({
     try {
       await navigator.clipboard.writeText(md);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      window.setTimeout(() => setCopied(false), 2000);
     } catch (err) {
+       
       console.error("Failed to copy to clipboard:", err);
     }
   };
 
+  const topControlClass = centerVertically ? "top-1/2 -translate-y-1/2" : "top-3";
+
   const content = (
-    <>
-      <div className="relative">
+    <div className="relative">
+      {/* ✅ No nested interactive controls:
+          Keep button + link as siblings in a non-interactive container. */}
+      <div className={`absolute right-3 ${topControlClass} z-10 flex items-center gap-3`}>
+        {href ? (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm underline hover:no-underline text-gray-600 dark:text-gray-300"
+          >
+            View on GitHub
+          </a>
+        ) : null}
+
         <button
+          type="button"
           onClick={copyToClipboard}
-          className={`absolute right-3 p-2 rounded-md bg-transparent text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors z-10 cursor-pointer ${
-            centerVertically ? "top-1/2 -translate-y-1/2" : "top-3"
-          }`}
-          aria-label="Copy to clipboard"
+          className="rounded-md bg-transparent p-2 text-gray-800 transition-colors hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800 cursor-pointer"
+          aria-label={copied ? "Copied" : "Copy to clipboard"}
         >
           {copied ? (
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 13l4 4L19 7"
-              />
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           ) : (
-            <CopyIcon className="w-4 h-4" />
+            <CopyIcon className="h-4 w-4" />
           )}
         </button>
-        <pre
-          className={`relative rounded-lg bg-white dark:bg-black text-gray-800 dark:text-gray-100 text-xs leading-6 overflow-x-auto p-4 ${
-            centerVertically ? "flex items-center" : ""
-          } ${
-            heightClass
-              ? heightClass
-              : compact
-              ? ""
-              : "min-h-[250px] max-h-[500px]"
-          } border border-gray-200 dark:border-gray-700 shadow-sm`}
-        >
-          <code>
-            {parseMarkdown(md)}
-          </code>
-        </pre>
       </div>
-    </>
+
+      <pre
+        className={`relative rounded-lg bg-white p-4 text-xs leading-6 text-gray-800 dark:bg-black dark:text-gray-100 overflow-x-auto border border-gray-200 dark:border-gray-700 shadow-sm ${
+          centerVertically ? "flex items-center" : ""
+        } ${heightClass ? heightClass : compact ? "" : "min-h-[250px] max-h-[500px]"}`}
+      >
+        <code>{parseMarkdown(md)}</code>
+      </pre>
+    </div>
   );
 
   if (compact) {
@@ -195,11 +191,9 @@ export default function CodeExample({
   }
 
   return (
-    <section className="px-6 pt-10 pb-24 bg-gray-50 dark:bg-gray-900/40">
-      <div className="max-w-5xl mx-auto flex flex-col gap-6">
-        <h2 className="text-3xl font-semibold tracking-tight">
-          AGENTS.md in action
-        </h2>
+    <section className="bg-gray-50 px-6 pb-24 pt-10 dark:bg-gray-900/40">
+      <div className="mx-auto flex max-w-5xl flex-col gap-6">
+        <h2 className="text-3xl font-semibold tracking-tight">AGENTS.md in action</h2>
         {content}
       </div>
     </section>
