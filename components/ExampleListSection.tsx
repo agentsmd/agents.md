@@ -56,13 +56,13 @@ const InnerGrid = ({
 }) => (
   <>
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {REPOS.map((repo, key) => (
+      {REPOS.map((repo, index) => (
         <ExampleCard
           key={repo.name}
           repo={repo}
           avatars={contributorsByRepo[repo.name]?.avatars ?? []}
-          hideOnSmall={key > 3}
-          hideOnMedium={key > 2}
+          hideOnSmall={index > 3}
+          hideOnMedium={index > 2}
           totalContributors={
             contributorsByRepo[repo.name]?.total ??
             contributorsByRepo[repo.name]?.avatars.length ??
