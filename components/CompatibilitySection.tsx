@@ -129,16 +129,15 @@ const agents: AgentEntry[] = [
     imageSrc: "/logos/uipath.svg",
   },
   {
-<<<<<<< add-augment-cli-agent
     name: "Augment Code",
     url: "https://docs.augmentcode.com/cli/overview",
     imageSrc: "/logos/augment.svg",
-=======
+  },
+  {
     name: "Junie",
     from: "JetBrains",
     url: "https://jetbrains.com/junie",
     imageSrc: "/logos/junie.svg",
->>>>>>> main
   },
 ];
 
