@@ -13,12 +13,6 @@ type AgentEntry = {
 
 const agents: AgentEntry[] = [
   {
-    name: "Junie",
-    from: "JetBrains",
-    url: "https://jetbrains.com/junie",
-    imageSrc: "/logos/junie.svg",
-  },
-  {
     name: "Codex",
     url: "https://openai.com/codex/",
     from: "OpenAI",
@@ -133,6 +127,12 @@ const agents: AgentEntry[] = [
     from: "UiPath",
     url: "https://uipath.github.io/uipath-python",
     imageSrc: "/logos/uipath.svg",
+  },
+  {
+    name: "Junie",
+    from: "JetBrains",
+    url: "https://jetbrains.com/junie",
+    imageSrc: "/logos/junie.svg",
   },
 ];
 
