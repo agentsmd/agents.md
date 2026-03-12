@@ -1,0 +1,27 @@
+/* File: /styles/marquee.css */
+
+/* Shared track animation (uses CSS variable for duration) */
+@keyframes agentsMarqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.logoMarqueeTrack {
+  width: max-content;
+  animation-name: agentsMarqueeScroll;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: var(--marquee-duration, 70s);
+  will-change: transform;
+}
+
+/* Play/pause state */
+.logoMarqueeRunning { animation-play-state: running; }
+.logoMarqueePaused  { animation-play-state: paused; }
+
+/* Duration presets (no inline styles) */
+.marqueeDuration70 { --marquee-duration: 70s; }
+.marqueeDuration80 { --marquee-duration: 80s; }
+
+/* Offset preset (no inline styles) */
+.marqueeOffsetNeg35 { animation-delay: -35s; }

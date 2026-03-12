@@ -47,3 +47,14 @@ that explains the project’s goals in a simple way, and featuring some examples
    pnpm run dev
    ```
 3. Open your browser and go to http://localhost:3000
+
+## Codex CLI update note (Windows)
+- Update Codex CLI with npm:
+  ```bash
+  npm install -g @openai/codex@latest
+  ```
+- If update fails with `EPERM` and a locked `codex.exe` on Windows:
+  - Close all running Codex terminals/windows.
+  - Retry the update command.
+  - If it still fails, restart Windows and run the command again.
+- Keep this repo workflow unchanged: use `pnpm` for project scripts.
