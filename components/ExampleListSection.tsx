@@ -38,8 +38,8 @@ const REPOS: RepoCardProps[] = [
     language: "Java",
   },
   {
-    name: "PlutoLang/Pluto",
-    description: "A superset of Lua 5.4 with a focus on general-purpose programming.",
+    name: "ggml-org/llama.cpp",
+    description: "LLM inference in C/C++.",
     language: "C++",
   },
 ];
