@@ -19,6 +19,12 @@ const agents: AgentEntry[] = [
     imageSrc: "/logos/codex.svg",
   },
   {
+    name: "AdaL",
+    url: "https://sylph.ai/",
+    from: "SylphAI",
+    imageSrc: "/logos/adal.svg",
+  },
+  {
     name: "Amp",
     url: "https://ampcode.com",
     imageSrc: "/logos/amp.svg",
