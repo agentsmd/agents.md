@@ -35,6 +35,11 @@ const agents: AgentEntry[] = [
     imageSrc: "/logos/cursor.svg",
   },
   {
+    name: "CoStrict",
+    url: "https://costrict.ai/",
+    imageSrc: "/logos/costrict.svg",
+  },
+  {
     name: "Factory",
     url: "https://factory.ai",
     imageSrc: "/logos/factory.svg",
