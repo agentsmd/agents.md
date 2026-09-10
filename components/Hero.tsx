@@ -38,14 +38,21 @@ export default function Hero() {
           </p>
 
         <div className="mt-6 flex gap-4 flex-col sm:flex-row w-full sm:w-auto justify-center sm:justify-start">
-          {/* Primary CTA — scroll to the Examples section */}
+          {/* Primary CTA — validator */}
+          <a
+            href="/validator"
+            className="inline-block px-5 py-3 rounded-full bg-black text-white dark:bg-white dark:text-black text-sm font-medium text-center hover:opacity-80"
+          >
+            Validate Your AGENTS.md
+          </a>
+          {/* Secondary CTA — scroll to the Examples section */}
           <a
             href="#examples"
-            className="inline-block px-5 py-3 rounded-full bg-black text-white dark:bg-white dark:text-black text-sm font-medium text-center hover:opacity-80"
+            className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-gray-300 dark:border-gray-600 text-sm font-medium text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800"
           >
             Explore Examples
           </a>
-          {/* Secondary CTA — view on GitHub */}
+          {/* Tertiary CTA — view on GitHub */}
           <a
             href="https://github.com/agentsmd/agents.md"
             target="_blank"
