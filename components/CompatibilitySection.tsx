@@ -139,6 +139,13 @@ const agents: AgentEntry[] = [
     url: "https://jetbrains.com/junie",
     imageSrc: "/logos/junie.svg",
   },
+  {
+    name: "Loki Mode",
+    from: "Autonomi",
+    url: "https://github.com/asklokesh/loki-mode",
+    imageSrcLight: "/logos/loki-mode.svg",
+    imageSrcDark: "/logos/loki-mode.svg",
+  },
 ];
 
 const shuffleAgents = (items: AgentEntry[]) => {
