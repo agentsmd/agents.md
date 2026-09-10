@@ -139,6 +139,12 @@ const agents: AgentEntry[] = [
     url: "https://jetbrains.com/junie",
     imageSrc: "/logos/junie.svg",
   },
+  {
+    name: "Qoder",
+    url: "https://docs.qoder.com/user-guide/rules#agents-md-compatibility",
+    imageSrcLight: "/logos/qoder-light.svg",
+    imageSrcDark: "/logos/qoder-dark.svg",
+  },
 ];
 
 const shuffleAgents = (items: AgentEntry[]) => {
