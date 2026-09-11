@@ -51,7 +51,7 @@ export const getStaticProps: GetStaticProps<LandingPageProps> = async () => {
     "openai/codex",
     "apache/airflow",
     "temporalio/sdk-java",
-    "PlutoLang/Pluto",
+    "carbon-language/carbon-lang",
   ];
 
   // If we fetched within the last 12 hours, reuse the cached data.
