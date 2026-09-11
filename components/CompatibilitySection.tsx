@@ -51,7 +51,7 @@ const agents: AgentEntry[] = [
   },
   {
     name: "Gemini CLI",
-    url: "https://github.com/google-gemini/gemini-cli/blob/main/docs/get-started/configuration.md#available-settings-in-settingsjson",
+    url: "https://github.com/google-gemini/gemini-cli/blob/main/docs/reference/configuration.md",
     from: "Google",
     imageSrc: "/logos/gemini.svg",
   },
