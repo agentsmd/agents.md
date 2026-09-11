@@ -77,7 +77,7 @@ const agents: AgentEntry[] = [
   },
   {
     name: "Zed",
-    url: "https://zed.dev/docs/ai/rules",
+    url: "https://zed.dev/docs/ai/instructions",
     imageSrc: "/logos/zed.svg",
   },
   {
