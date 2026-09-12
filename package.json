@@ -6,14 +6,20 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "tsc --noEmit",
+    "test": "node --test tests/aps-preflight.test.cjs tests/endpoint-matrix.test.cjs tests/auto-drill-selector.test.cjs tests/pacific-heart-ingest.test.cjs tests/runtime-proof-lane.test.cjs tests/skygrid-pnpk-preflight.test.cjs tests/web3-onramp.test.cjs",
+    "endpoint:matrix": "node scripts/generate-endpoint-matrix.mjs",
+    "test.config": "node --test tests/web3-onramp.test.cjs tests/endpoint-matrix.test.cjs",
+    "preflight:interference": "node --test tests/preflight-ledger.test.cjs tests/web3-onramp.test.cjs",
+    "validator:health": "node scripts/validate-web3-health.cjs",
+    "skygrid:preflight": "node scripts/skygrid-pnpk-preflight.cjs"
   },
   "dependencies": {
     "@tailwindcss/postcss": "4.1.11",
     "@vercel/analytics": "^1.5.0",
-    "next": "15.4.8",
-    "react": "19.1.2",
-    "react-dom": "19.1.2",
+    "next": "16.2.6",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
     "tailwindcss": "4.1.11"
   },
   "devDependencies": {
@@ -22,6 +28,5 @@
     "@types/react": "19",
     "@types/react-dom": "19",
     "typescript": "5"
-  },
-  "packageManager": "pnpm@9.15.1+sha256.9e534e70afef06374f6126b44bda5760947135ce16a30aef1010e965fb7e3e3e"
+  }
 }

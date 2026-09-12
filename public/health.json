@@ -1,0 +1,25 @@
+{
+  "service": "SKYGRID Option B Front Door",
+  "status": "pilot-hardening",
+  "ok": true,
+  "mode": "local-first-cloud-reserve",
+  "option": "option-b-local-first-dc-skygrid-reserve",
+  "redundancy": {
+    "primary": "Vercel edge / Next.js website",
+    "reserve": "AWS / DC SKYGRID reserve compute",
+    "localFirst": true,
+    "cloudReserve": true
+  },
+  "safety": {
+    "walletMovement": false,
+    "swaps": false,
+    "hiddenMining": false,
+    "fakeLiveClaims": false,
+    "proofRequired": true
+  },
+  "cachePolicy": {
+    "staticAssets": "immutable 1 year",
+    "frontDoor": "edge cache with stale-while-revalidate",
+    "health": "short cache for observability"
+  }
+}

@@ -1,8 +1,6 @@
 # AGENTS.md
 
-<p align="center">
-  <img src="https://agents.md/og.png">
-</p>
+![AGENTS.md logo](./public/og.png)
 
 [AGENTS.md](https://agents.md) is a simple, open format for guiding coding agents.
 

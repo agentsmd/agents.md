@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0",
+  "generatedBy": "skygrid-auto-drill",
+  "rows": [
+    {
+      "endpoint": "/",
+      "method": "GET",
+      "expectedStatus": 200,
+      "cachePolicy": "swr",
+      "proofTag": "front-door"
+    },
+    {
+      "endpoint": "/health.json",
+      "method": "GET",
+      "expectedStatus": 200,
+      "cachePolicy": "short",
+      "proofTag": "health-manifest"
+    },
+    {
+      "endpoint": "/logos/codex.svg",
+      "method": "GET",
+      "expectedStatus": 200,
+      "cachePolicy": "immutable",
+      "proofTag": "static-asset"
+    }
+  ],
+  "summary": {
+    "totalEndpoints": 3,
+    "byCachePolicy": {
+      "immutable": 1,
+      "short": 1,
+      "swr": 1,
+      "none": 0
+    }
+  }
+}

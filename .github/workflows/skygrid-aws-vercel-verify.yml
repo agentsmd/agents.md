@@ -1,0 +1,159 @@
+name: SKYGRID AWS Vercel Verify
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "next.config.ts"
+      - "vercel.json"
+      - ".github/workflows/skygrid-aws-vercel-verify.yml"
+  pull_request:
+    paths:
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "next.config.ts"
+      - "vercel.json"
+      - ".github/workflows/skygrid-aws-vercel-verify.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  AWS_REGION: ${{ secrets.AWS_REGION || 'us-east-1' }}
+  AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  SKYGRID_API_BASE: ${{ secrets.SKYGRID_API_BASE }}
+  SKYGRID_HEALTH_URL: ${{ secrets.SKYGRID_HEALTH_URL }}
+
+jobs:
+  verify:
+    name: Verify dependencies and AWS/SKYGRID wiring
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.1
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "pnpm"
+
+      - name: Validate AWS credential path
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          has_role="no"
+          has_static_keys="no"
+
+          if [ -n "${AWS_ROLE_ARN:-}" ]; then
+            has_role="yes"
+          fi
+
+          if [ -n "${AWS_ACCESS_KEY_ID:-}" ] && [ -n "${AWS_SECRET_ACCESS_KEY:-}" ]; then
+            has_static_keys="yes"
+          fi
+
+          echo "SKYGRID AWS/Vercel preflight"
+          echo "- AWS_REGION: ${AWS_REGION}"
+          echo "- AWS_ROLE_ARN configured: ${has_role}"
+          echo "- Static AWS key pair configured: ${has_static_keys}"
+          echo "- SKYGRID_API_BASE configured: $([ -n "${SKYGRID_API_BASE:-}" ] && echo yes || echo no)"
+          echo "- SKYGRID_HEALTH_URL configured: $([ -n "${SKYGRID_HEALTH_URL:-}" ] && echo yes || echo no)"
+
+          if [ "${has_role}" != "yes" ] && [ "${has_static_keys}" != "yes" ]; then
+            echo "::warning title=No AWS credential provider::AWS identity proof will be skipped until AWS_ROLE_ARN or static key pair is configured."
+          fi
+
+      - name: Configure AWS credentials using OIDC role
+        if: env.AWS_ROLE_ARN != ''
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+          role-session-name: agents-md-skygrid-${{ github.run_id }}
+
+      - name: Configure AWS credentials using static keys
+        if: env.AWS_ROLE_ARN == '' && env.AWS_ACCESS_KEY_ID != '' && env.AWS_SECRET_ACCESS_KEY != ''
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Verify AWS identity when credentials exist
+        if: env.AWS_ROLE_ARN != '' || (env.AWS_ACCESS_KEY_ID != '' && env.AWS_SECRET_ACCESS_KEY != '')
+        run: |
+          set -euo pipefail
+          aws sts get-caller-identity
+
+      - name: Install dependencies with lockfile proof
+        run: pnpm install --frozen-lockfile
+
+      - name: Verify patched dependency versions
+        run: |
+          set -euo pipefail
+          node - <<'NODE'
+          const pkg = require('./package.json');
+          const expected = { next: '16.2.6', react: '19.2.6', 'react-dom': '19.2.6' };
+          for (const [name, version] of Object.entries(expected)) {
+            const actual = pkg.dependencies?.[name];
+            if (actual !== version) {
+              throw new Error(`${name} expected ${version}, got ${actual}`);
+            }
+            console.log(`OK ${name}@${actual}`);
+          }
+          NODE
+
+      - name: Type-check
+        run: pnpm lint
+
+      - name: Verify Vercel/SKYGRID config exists
+        run: |
+          set -euo pipefail
+          test -f vercel.json
+          node - <<'NODE'
+          const fs = require('fs');
+          const config = JSON.parse(fs.readFileSync('vercel.json', 'utf8'));
+          const required = [
+            'NEXT_PUBLIC_SKYGRID_MODE',
+            'NEXT_PUBLIC_SKYGRID_NETWORK',
+            'NEXT_PUBLIC_AWS_REGION',
+            'NEXT_PUBLIC_SKYGRID_API_BASE',
+            'NEXT_PUBLIC_SKYGRID_HEALTH_URL',
+          ];
+          for (const key of required) {
+            if (!config.env || !(key in config.env)) {
+              throw new Error(`Missing vercel env mapping: ${key}`);
+            }
+            console.log(`OK vercel env ${key}`);
+          }
+          NODE
+
+      - name: Write verification summary
+        if: always()
+        run: |
+          set -euo pipefail
+          {
+            echo "## SKYGRID AWS Vercel Verify"
+            echo ""
+            echo "- Next.js target: 16.2.6"
+            echo "- React target: 19.2.6"
+            echo "- AWS region: ${AWS_REGION}"
+            echo "- AWS identity proof attempted when credentials exist"
+            echo "- SKYGRID API base configured: $([ -n "${SKYGRID_API_BASE:-}" ] && echo yes || echo no)"
+            echo "- SKYGRID health URL configured: $([ -n "${SKYGRID_HEALTH_URL:-}" ] && echo yes || echo no)"
+            echo "- Secrets printed: no"
+          } >> "$GITHUB_STEP_SUMMARY"

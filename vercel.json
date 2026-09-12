@@ -1,0 +1,180 @@
+{
+  "framework": "nextjs",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "buildCommand": "pnpm build",
+  "devCommand": "pnpm dev",
+  "env": {
+    "NEXT_PUBLIC_SKYGRID_MODE": "aws-linked",
+    "NEXT_PUBLIC_SKYGRID_NETWORK": "production",
+    "NEXT_PUBLIC_AWS_REGION": "@aws_region",
+    "NEXT_PUBLIC_SKYGRID_API_BASE": "@skygrid_api_base",
+    "NEXT_PUBLIC_SKYGRID_HEALTH_URL": "@skygrid_health_url"
+  },
+  "headers": [
+    {
+      "source": "/_next/static/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/logos/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/favicon.ico",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, s-maxage=604800"
+        }
+      ]
+    },
+    {
+      "source": "/og.png",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, s-maxage=604800"
+        }
+      ]
+    },
+    {
+      "source": "/health.json",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=30, s-maxage=60, stale-while-revalidate=300"
+        },
+        {
+          "key": "X-SKYGRID-Health",
+          "value": "edge-readable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=120, s-maxage=86400, stale-while-revalidate=604800"
+        },
+        {
+          "key": "X-SKYGRID-Link",
+          "value": "aws-vercel"
+        },
+        {
+          "key": "X-Aura-Core-Mode",
+          "value": "local-first-cloud-reserve"
+        },
+        {
+          "key": "X-SKYGRID-Option",
+          "value": "option-b-local-first-dc-reserve"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/api/runtime"
+    },
+    {
+      "source": "/health.json",
+      "destination": "/api/runtime"
+    },
+    {
+      "source": "/dispatch",
+      "destination": "/api/runtime"
+    },
+    {
+      "source": "/scenarios",
+      "destination": "/api/runtime"
+    },
+    {
+      "source": "/rates",
+      "destination": "/api/runtime"
+    },
+    {
+      "source": "/base",
+      "destination": "/api/runtime"
+    },
+    {
+      "source": "/pay",
+      "destination": "/api/runtime"
+    },
+    {
+      "source": "/highway",
+      "destination": "/api/runtime"
+    },
+    {
+      "source": "/interface",
+      "destination": "/api/runtime"
+    },
+    {
+      "source": "/api/pay/quote",
+      "destination": "/api/runtime"
+    },
+    {
+      "source": "/api/rates/base",
+      "destination": "/api/runtime"
+    },
+    {
+      "source": "/api/highway/status",
+      "destination": "/api/runtime"
+    },
+    {
+      "source": "/api/highway/flasks",
+      "destination": "/api/runtime"
+    },
+    {
+      "source": "/api/highway/postman",
+      "destination": "/api/runtime"
+    },
+    {
+      "source": "/api/skygrid/status",
+      "destination": "/api/runtime"
+    },
+    {
+      "source": "/api/skygrid/intake",
+      "destination": "/api/runtime"
+    },
+    {
+      "source": "/api/aura-core/decide",
+      "destination": "/api/runtime"
+    }
+  ]
+}

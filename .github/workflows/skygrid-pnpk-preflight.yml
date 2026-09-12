@@ -1,0 +1,48 @@
+name: SKYGRID PNPK preflight
+
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: Public deployment origin to validate
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  bridge-preflight:
+    runs-on: ubuntu-latest
+    env:
+      SKYGRID_PREFLIGHT_BASE_URL: ${{ inputs.base_url || vars.SKYGRID_PREFLIGHT_BASE_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Run PNPK bridge checks
+        id: preflight
+        continue-on-error: true
+        run: |
+          mkdir -p artifacts
+          node scripts/skygrid-pnpk-preflight.cjs "$SKYGRID_PREFLIGHT_BASE_URL" > artifacts/skygrid-pnpk-preflight.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: skygrid-pnpk-preflight
+          path: artifacts/skygrid-pnpk-preflight.json
+      - name: Open triaged Linear issue
+        if: steps.preflight.outcome == 'failure'
+        env:
+          LINEAR_API_KEY: ${{ secrets.LINEAR_API_KEY }}
+          LINEAR_TEAM_ID: ${{ secrets.LINEAR_TEAM_ID }}
+        run: node scripts/create-linear-preflight-issue.cjs artifacts/skygrid-pnpk-preflight.json
+      - name: Fail workflow when bridge is not ready
+        if: steps.preflight.outcome == 'failure'
+        run: exit 1

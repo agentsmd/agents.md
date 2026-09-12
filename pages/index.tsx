@@ -9,6 +9,7 @@ import CompatibilitySection from "@/components/CompatibilitySection";
 import { GetStaticProps } from "next";
 import WhySection from "@/components/WhySection";
 import AboutSection from "@/components/AboutSection";
+import Web3OnRampSection from "@/components/Web3OnRampSection";
 
 interface LandingPageProps {
   contributorsByRepo: Record<string, { avatars: string[]; total: number }>;
@@ -23,6 +24,7 @@ export default function LandingPage({ contributorsByRepo }: LandingPageProps) {
         <CompatibilitySection />
         <ExamplesSection contributorsByRepo={contributorsByRepo} />
         <HowToUseSection />
+        <Web3OnRampSection />
         <div className="flex-1 flex flex-col gap-4 mt-16">
           <AboutSection />
           <FAQSection />

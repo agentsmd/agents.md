@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Minns | SKYGRID Q&A Buddy</title>
+    <meta
+      name="description"
+      content="Meet Minns, the friendly SKYGRID Q&A buddy for SKYBRIDGE Local, solar installers, node readiness, proof trails, and safe opt-in participation."
+    />
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #07111f;
+        color: #f8fafc;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at 12% 10%, rgba(168, 85, 247, 0.22), transparent 28rem),
+          radial-gradient(circle at 90% 18%, rgba(34, 211, 238, 0.22), transparent 30rem),
+          radial-gradient(circle at 72% 90%, rgba(250, 204, 21, 0.16), transparent 28rem),
+          linear-gradient(135deg, #07111f, #111827 52%, #1e1b4b);
+      }
+      main {
+        width: min(1120px, 94vw);
+        margin: 0 auto;
+        padding: 4rem 0;
+      }
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+        gap: 1.5rem;
+        align-items: stretch;
+      }
+      .panel {
+        border: 1px solid rgba(255,255,255,0.14);
+        border-radius: 30px;
+        background: rgba(7, 17, 31, 0.72);
+        box-shadow: 0 30px 90px rgba(0,0,0,0.42);
+        backdrop-filter: blur(18px);
+        padding: clamp(1.4rem, 4vw, 3rem);
+      }
+      .eyebrow {
+        color: #67e8f9;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        font-size: 0.78rem;
+        font-weight: 850;
+      }
+      h1 {
+        font-size: clamp(3rem, 8vw, 6.4rem);
+        line-height: 0.92;
+        margin: 0.85rem 0 1rem;
+        letter-spacing: -0.07em;
+      }
+      h1 span { color: #fde68a; }
+      p {
+        color: #cbd5e1;
+        font-size: 1.08rem;
+        line-height: 1.68;
+      }
+      .buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.85rem;
+        margin-top: 1.7rem;
+      }
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        padding: 0.95rem 1.25rem;
+        text-decoration: none;
+        font-weight: 850;
+        border: 1px solid rgba(255,255,255,0.18);
+        color: inherit;
+      }
+      .primary {
+        background: linear-gradient(135deg, #22d3ee, #a78bfa, #facc15);
+        color: #07111f;
+      }
+      .secondary { background: rgba(255,255,255,0.08); }
+      .minns-card {
+        position: relative;
+        overflow: hidden;
+      }
+      .avatar {
+        width: 96px;
+        height: 96px;
+        border-radius: 28px;
+        display: grid;
+        place-items: center;
+        font-size: 3rem;
+        background: linear-gradient(135deg, rgba(34,211,238,0.28), rgba(250,204,21,0.25));
+        border: 1px solid rgba(255,255,255,0.18);
+        box-shadow: 0 0 45px rgba(34,211,238,0.2);
+      }
+      .chat {
+        margin-top: 1.3rem;
+        display: grid;
+        gap: 0.8rem;
+      }
+      .bubble {
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 20px;
+        padding: 1rem;
+        background: rgba(255,255,255,0.07);
+        color: #dbeafe;
+        line-height: 1.55;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        margin-top: 1rem;
+      }
+      .chip {
+        border: 1px solid rgba(103,232,249,0.35);
+        border-radius: 999px;
+        padding: 0.65rem 0.8rem;
+        background: rgba(14,165,233,0.10);
+        color: #e0f2fe;
+        font-weight: 750;
+        font-size: 0.92rem;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 0.9rem;
+        margin-top: 1.4rem;
+      }
+      .card {
+        border: 1px solid rgba(255,255,255,0.12);
+        background: rgba(255,255,255,0.06);
+        border-radius: 20px;
+        padding: 1rem;
+        color: #dbeafe;
+      }
+      .fineprint {
+        margin-top: 1.2rem;
+        color: #94a3b8;
+        font-size: 0.86rem;
+      }
+      @media (max-width: 840px) {
+        .hero { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="hero" aria-label="Meet Minns">
+        <div class="panel">
+          <div class="eyebrow">SKYGRID / SKYBRIDGE Local</div>
+          <h1>Meet <span>Minns</span>.</h1>
+          <p>
+            Minns is the friendly Q&A buddy for SKYGRID. She helps solar installers, device owners,
+            and community partners understand SKYBRIDGE Local, opt-in node readiness, token/network
+            support choices, and proof-first infrastructure.
+          </p>
+          <p>
+            Start simple: ask what SKYBRIDGE is, how the QR works, whether it is mining, how rewards
+            are handled, or where the proof trail lives.
+          </p>
+          <div class="buttons">
+            <a class="button primary" href="https://aura-sky-skygrid-protocol.b12sites.com/#contact">Ask Minns / Join Waitlist</a>
+            <a class="button secondary" href="/sunny-side.html">Sunny Side QR Page</a>
+            <a class="button secondary" href="https://aura-sky-skygrid-protocol.b12sites.com/#proof">View Proof Trail</a>
+          </div>
+          <p class="fineprint">
+            Minns answers from approved SKYGRID / Aura-Core materials first. She does not move wallets,
+            collect private keys, execute swaps, run hidden mining, guarantee earnings, or provide financial advice.
+          </p>
+        </div>
+
+        <aside class="panel minns-card" aria-label="Minns Q&A preview">
+          <div class="avatar" aria-hidden="true">☀️</div>
+          <h2>Minns Q&A</h2>
+          <div class="chat">
+            <div class="bubble"><strong>Minns:</strong> Hi, I’m Minns. I can explain SKYBRIDGE Local in plain language and help you find the right next step.</div>
+            <div class="bubble"><strong>You:</strong> Is this mining?</div>
+            <div class="bubble"><strong>Minns:</strong> No hidden mining. SKYBRIDGE is opt-in node readiness and infrastructure support. Rewards require clear terms and active consent.</div>
+          </div>
+          <div class="chips" aria-label="Suggested Minns questions">
+            <span class="chip">What is SKYBRIDGE Local?</span>
+            <span class="chip">Can I get paid?</span>
+            <span class="chip">Is this mining?</span>
+            <span class="chip">Which token can I support?</span>
+            <span class="chip">How do solar installers join?</span>
+            <span class="chip">Show me the proof trail.</span>
+          </div>
+        </aside>
+      </section>
+
+      <section class="grid" aria-label="Minns front page roles">
+        <div class="card"><strong>For Solar Installers</strong><br />Minns explains the QR handoff and partner waitlist in friendly terms.</div>
+        <div class="card"><strong>For Device Owners</strong><br />Minns explains opt-in node readiness, supported networks, and safety boundaries.</div>
+        <div class="card"><strong>For SKYGRID Proof</strong><br />Minns routes users to health status, proof trails, and clear next steps.</div>
+      </section>
+    </main>
+  </body>
+</html>

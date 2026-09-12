@@ -73,10 +73,10 @@ const InnerGrid = ({
     </div>
     <div className="flex justify-center mt-6">
       <a
-        href="https://github.com/search?q=path%3AAGENTS.md&type=code"
+        href="https://github.com/search?q=path%3AAGENTS.md+NOT+is%3Afork+NOT+is%3Aarchived&type=code"
         className="text-base font-medium underline hover:no-underline"
       >
-        View 20k+ examples on GitHub
+        View 60k+ examples on GitHub
       </a>
     </div>
   </>

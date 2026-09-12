@@ -1,0 +1,215 @@
+<section id="skygrid-lease-intake" data-skygrid-b12="lease-intake">
+  <style>
+    #skygrid-lease-intake {
+      --sg-bg: #060b16;
+      --sg-card: #0f172a;
+      --sg-muted: #93a4c5;
+      --sg-text: #e6efff;
+      --sg-accent: #60a5fa;
+      --sg-accent-2: #22d3ee;
+      --sg-danger: #fca5a5;
+      --sg-border: #1e293b;
+      color: var(--sg-text);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: radial-gradient(circle at 20% 0%, #0b1b3f 0%, var(--sg-bg) 45%);
+      border: 1px solid var(--sg-border);
+      border-radius: 16px;
+      padding: 24px;
+      line-height: 1.4;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    #skygrid-lease-intake h2, #skygrid-lease-intake h3 { margin: 0 0 10px; }
+    #skygrid-lease-intake p { margin: 0 0 14px; color: var(--sg-muted); }
+    #skygrid-lease-intake .sg-grid { display: grid; gap: 14px; }
+    @media (min-width: 860px) { #skygrid-lease-intake .sg-grid { grid-template-columns: 1fr 1fr; } }
+    #skygrid-lease-intake .sg-card {
+      border: 1px solid var(--sg-border);
+      background: rgba(15, 23, 42, 0.85);
+      border-radius: 12px;
+      padding: 14px;
+    }
+    #skygrid-lease-intake label { display: block; font-size: 13px; margin-bottom: 6px; }
+    #skygrid-lease-intake input, #skygrid-lease-intake select, #skygrid-lease-intake textarea {
+      width: 100%;
+      box-sizing: border-box;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      background: #020617;
+      color: var(--sg-text);
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    #skygrid-lease-intake .sg-row { display: grid; gap: 10px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { #skygrid-lease-intake .sg-row { grid-template-columns: 1fr 1fr; } }
+    #skygrid-lease-intake .sg-ctas { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0; }
+    #skygrid-lease-intake .sg-btn {
+      border-radius: 8px;
+      border: 1px solid #2563eb;
+      background: linear-gradient(90deg, var(--sg-accent), var(--sg-accent-2));
+      color: #001226;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 10px 14px;
+      display: inline-block;
+      cursor: pointer;
+    }
+    #skygrid-lease-intake .sg-btn.secondary {
+      background: transparent;
+      color: var(--sg-text);
+      border-color: #475569;
+    }
+    #skygrid-lease-intake small, #skygrid-lease-intake li { color: var(--sg-muted); }
+    #skygrid-lease-intake .sg-warn { color: var(--sg-danger); font-weight: 600; }
+    #skygrid-lease-intake .sg-kv { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: #c7d2fe; }
+  </style>
+
+  <h2>Lease Your Device for Income</h2>
+  <p>
+    SKYGRID Option B is a local-first, cloud-reserve validation architecture with an edge-cached website front door and public health manifest.
+    This intake collects only consent-first operational details and never asks for seed phrases, private keys, passwords, or device admin credentials.
+  </p>
+
+  <div class="sg-grid">
+    <article class="sg-card">
+      <h3>Device Lease + Validator Interest Intake</h3>
+      <form id="sgLeaseForm" action="#" method="post" novalidate>
+        <div class="sg-row">
+          <div>
+            <label for="ownerName">Owner name *</label>
+            <input id="ownerName" name="ownerName" required autocomplete="name" />
+          </div>
+          <div>
+            <label for="ownerEmail">Owner email *</label>
+            <input id="ownerEmail" name="ownerEmail" type="email" required autocomplete="email" />
+          </div>
+        </div>
+
+        <div class="sg-row">
+          <div>
+            <label for="deviceType">Device type *</label>
+            <select id="deviceType" name="deviceType" required>
+              <option value="">Select…</option>
+              <option>Desktop GPU</option>
+              <option>Server</option>
+              <option>Laptop</option>
+              <option>Edge node</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div>
+            <label for="networkRegion">Network / region *</label>
+            <input id="networkRegion" name="networkRegion" placeholder="e.g., US-East / Fiber" required />
+          </div>
+        </div>
+
+        <label for="uptime">Estimated uptime (%)</label>
+        <input id="uptime" name="uptime" placeholder="e.g., 92" inputmode="decimal" />
+
+        <label for="notes">Operational notes (optional)</label>
+        <textarea id="notes" name="notes" rows="4" placeholder="Bandwidth profile, maintenance window, hardware specs, etc."></textarea>
+
+        <label>
+          <input id="consent" name="consent" type="checkbox" required />
+          I understand there is no guaranteed income and no silent mining or validation. Activation requires explicit agreement, readiness checks, and legal/compliance review.
+        </label>
+
+        <div class="sg-ctas">
+          <button class="sg-btn" type="submit">Submit lease intake</button>
+          <a class="sg-btn secondary" id="validatorInterestBtn" href="#" target="_blank" rel="noopener">Validator interest</a>
+          <a class="sg-btn secondary" id="pilotRequestBtn" href="#" target="_blank" rel="noopener">Pilot request</a>
+        </div>
+      </form>
+      <small class="sg-warn">Do not submit wallet private keys, seed phrases, passwords, or remote access credentials.</small>
+    </article>
+
+    <aside class="sg-card">
+      <h3>Payment + Chain Handoff (Placeholder)</h3>
+      <p>Use these controls while backend and checkout endpoints are being finalized. They work with safe new-tab and mailto fallbacks.</p>
+      <div class="sg-ctas">
+        <a class="sg-btn" id="stripeCheckoutBtn" href="#" target="_blank" rel="noopener">Reserve validator slot (Stripe)</a>
+        <a class="sg-btn secondary" id="walletHandoffBtn" href="#" target="_blank" rel="noopener">Wallet / chain handoff</a>
+        <a class="sg-btn secondary" id="discordBtn" href="#" target="_blank" rel="noopener">Join SKYGRID Discord</a>
+      </div>
+      <p class="sg-kv" id="chainMeta"></p>
+
+      <h3>Readiness checklist</h3>
+      <ul>
+        <li>✔ Device health + bandwidth baseline captured.</li>
+        <li>✔ Consent and operator identity verified.</li>
+        <li>✔ Legal/compliance review completed for destination chain.</li>
+        <li>✔ Payment source and fee terms confirmed (3% Aura-Core fee).</li>
+        <li>✔ Validator routing enabled only after explicit approval.</li>
+      </ul>
+      <p><strong>Fee disclosure:</strong> Aura-Core platform fee is 3% of validator payout flow unless superseded by signed terms.</p>
+      <p><strong>Disclaimer:</strong> Estimated earnings depend on chain selection, demand, uptime, bandwidth, and liquidity.</p>
+    </aside>
+  </div>
+
+  <script>
+    (function () {
+      const CFG = {
+        intakeEndpoint: "", // e.g. https://api.example.com/lease-intake
+        stripeCheckoutUrl: "https://example.com/stripe-checkout-placeholder",
+        discordUrl: "https://discord.gg/example",
+        validatorInterestUrl: "",
+        pilotRequestUrl: "",
+        walletHandoffUrl: "",
+        fallbackEmail: "ops@skygrid.example",
+        chainName: "AURA / SKYGRID pilot chain",
+        chainId: "TBD",
+        destinationWallet: "0xREPLACE_WITH_PUBLIC_DESTINATION"
+      };
+
+      const form = document.getElementById("sgLeaseForm");
+      const byId = (id) => document.getElementById(id);
+
+      const safeHref = (id, directUrl, fallbackSubject) => {
+        const node = byId(id);
+        const mailto = `mailto:${CFG.fallbackEmail}?subject=${encodeURIComponent(fallbackSubject)}`;
+        node.href = (directUrl && /^https?:\/\//i.test(directUrl)) ? directUrl : mailto;
+      };
+
+      safeHref("stripeCheckoutBtn", CFG.stripeCheckoutUrl, "SKYGRID validator slot payment request");
+      safeHref("discordBtn", CFG.discordUrl, "SKYGRID Discord invite request");
+      safeHref("validatorInterestBtn", CFG.validatorInterestUrl, "Validator interest form request");
+      safeHref("pilotRequestBtn", CFG.pilotRequestUrl, "Pilot request form");
+      safeHref("walletHandoffBtn", CFG.walletHandoffUrl, "Wallet and chain handoff details request");
+
+      byId("chainMeta").textContent = `Chain: ${CFG.chainName} | Chain ID: ${CFG.chainId} | Destination wallet: ${CFG.destinationWallet}`;
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const data = new FormData(form);
+        if (!form.reportValidity()) return;
+
+        const payload = Object.fromEntries(data.entries());
+        const body = [
+          "SKYGRID Lease Intake",
+          `Owner: ${payload.ownerName || ""}`,
+          `Email: ${payload.ownerEmail || ""}`,
+          `Device: ${payload.deviceType || ""}`,
+          `Network/Region: ${payload.networkRegion || ""}`,
+          `Uptime: ${payload.uptime || ""}`,
+          `Notes: ${payload.notes || ""}`,
+          "Consent confirmed: yes"
+        ].join("\n");
+
+        if (CFG.intakeEndpoint && /^https?:\/\//i.test(CFG.intakeEndpoint)) {
+          fetch(CFG.intakeEndpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          }).then(function () {
+            alert("Intake sent. We'll follow up after readiness and compliance review.");
+          }).catch(function () {
+            window.location.href = `mailto:${CFG.fallbackEmail}?subject=${encodeURIComponent("SKYGRID lease intake submission")}&body=${encodeURIComponent(body)}`;
+          });
+          return;
+        }
+
+        window.location.href = `mailto:${CFG.fallbackEmail}?subject=${encodeURIComponent("SKYGRID lease intake submission")}&body=${encodeURIComponent(body)}`;
+      });
+    })();
+  </script>
+</section>

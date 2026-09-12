@@ -1,0 +1,23 @@
+[
+  {
+    "endpoint": "/",
+    "method": "get",
+    "expectedStatus": 200,
+    "cachePolicy": "swr",
+    "proofTag": "front-door"
+  },
+  {
+    "endpoint": "/health.json",
+    "method": "get",
+    "expectedStatus": 200,
+    "cachePolicy": "short",
+    "proofTag": "health-manifest"
+  },
+  {
+    "endpoint": "/logos/codex.svg",
+    "method": "get",
+    "expectedStatus": 200,
+    "cachePolicy": "immutable",
+    "proofTag": "static-asset"
+  }
+]

@@ -1,0 +1,128 @@
+{
+  "info": {
+    "name": "SkyGrid Web3 On-Ramp Reference Generator",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "https://example.vercel.app" },
+    { "key": "onRampId", "value": "" },
+    { "key": "paymentRef", "value": "" },
+    { "key": "proofId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Health - Base USDC",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/web3/chains/health"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('health returns Base USDC contract', function () {",
+              "  const json = pm.response.json();",
+              "  pm.expect(json.receiverWallet).to.eql('0xbAA5A03bC268546194550a427d3F1d5787c15403');",
+              "  pm.expect(json.defaultChain.chainId).to.eql(8453);",
+              "  pm.expect(json.defaultToken.address).to.eql('0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913');",
+              "  pm.expect(json.guardrails.serverSigning).to.eql(false);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Create On-Ramp Reference",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"pathway\":\"node_hosting\",\"asset\":\"USDC\",\"amount\":\"25.00\",\"chainId\":8453,\"consentConfirmed\":true}"
+        },
+        "url": "{{base_url}}/api/web3/onramp/new"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('quote creates required identifiers and treasury details', function () {",
+              "  const json = pm.response.json();",
+              "  pm.expect(json.onRampId).to.match(/^onramp_/);",
+              "  pm.expect(json.paymentRef).to.match(/^SG-\\d{8}-[A-F0-9]{8}$/);",
+              "  pm.expect(json.proofId).to.match(/^proof_/);",
+              "  pm.expect(json.receiverWallet).to.eql('0xbAA5A03bC268546194550a427d3F1d5787c15403');",
+              "  pm.expect(json.chainId).to.eql(8453);",
+              "  pm.expect(json.token.address).to.eql('0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913');",
+              "  pm.collectionVariables.set('onRampId', json.onRampId);",
+              "  pm.collectionVariables.set('paymentRef', json.paymentRef);",
+              "  pm.collectionVariables.set('proofId', json.proofId);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Submit Proof",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"onRampId\":\"{{onRampId}}\",\"paymentRef\":\"{{paymentRef}}\",\"proofId\":\"{{proofId}}\",\"txHash\":\"0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"receiverWallet\":\"0xbAA5A03bC268546194550a427d3F1d5787c15403\",\"tokenAddress\":\"0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913\",\"chainId\":8453,\"amount\":\"25.00\",\"consentConfirmed\":true}"
+        },
+        "url": "{{base_url}}/api/web3/onramp/proof"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('proof is accepted for review', function () {",
+              "  const json = pm.response.json();",
+              "  pm.expect(json.status).to.eql('submitted_for_review');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reject Missing Consent",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"pathway\":\"node_hosting\",\"asset\":\"USDC\",\"amount\":\"25.00\",\"chainId\":8453,\"consentConfirmed\":false}" },
+        "url": "{{base_url}}/api/web3/onramp/new"
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('missing consent rejected', function () { pm.expect(pm.response.json().error).to.eql('consent_required'); });"] } }]
+    },
+    {
+      "name": "Reject Invalid Chain",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"pathway\":\"node_hosting\",\"asset\":\"USDC\",\"amount\":\"25.00\",\"chainId\":1,\"consentConfirmed\":true}" },
+        "url": "{{base_url}}/api/web3/onramp/new"
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('invalid chain rejected', function () { pm.expect(pm.response.json().error).to.eql('unsupported_chain'); });"] } }]
+    },
+    {
+      "name": "Reject Invalid Proof Receiver",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"onRampId\":\"onramp_00000000-0000-4000-8000-000000000000\",\"paymentRef\":\"SG-20260601-AAAAAAAA\",\"proofId\":\"proof_00000000-0000-4000-8000-000000000000\",\"txHash\":\"0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"receiverWallet\":\"0x0000000000000000000000000000000000000000\",\"tokenAddress\":\"0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913\",\"chainId\":8453,\"amount\":\"25.00\",\"consentConfirmed\":true}" },
+        "url": "{{base_url}}/api/web3/onramp/proof"
+      },
+      "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('wrong receiver rejected', function () { pm.expect(pm.response.json().error).to.eql('wrong_receiver'); });"] } }]
+    }
+  ]
+}
