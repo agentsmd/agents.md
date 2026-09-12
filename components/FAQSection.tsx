@@ -65,11 +65,11 @@ export default function FAQ() {
       ),
     },
     {
-      question: "How do I configure Gemini CLI?",
+      question: "How do I configure Antigravity CLI?",
       answer: (
         <>
           <p className="mb-2">
-            Configure Gemini CLI to use AGENTS.md in <code>.gemini/settings.json</code>:
+            Configure Antigravity CLI to use AGENTS.md in <code>.gemini/settings.json</code>:
           </p>
           <div className="w-full flex justify-center">
             <CodeExample

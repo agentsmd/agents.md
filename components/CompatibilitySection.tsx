@@ -50,10 +50,10 @@ const agents: AgentEntry[] = [
     imageSrc: "/logos/aider.svg",
   },
   {
-    name: "Gemini CLI",
-    url: "https://github.com/google-gemini/gemini-cli/blob/main/docs/get-started/configuration.md#available-settings-in-settingsjson",
+    name: "Antigravity CLI",
+    url: "https://antigravity.google/docs/cli/best-practices#write-a-codebase-rule-file",
     from: "Google",
-    imageSrc: "/logos/gemini.svg",
+    imageSrc: "/logos/antigravity.svg",
   },
   {
     name: "goose",
