@@ -11,7 +11,7 @@
   "dependencies": {
     "@tailwindcss/postcss": "4.1.11",
     "@vercel/analytics": "^1.5.0",
-    "next": "16.1.0",
+    "next": "16.2.12",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "tailwindcss": "4.1.11"
@@ -23,5 +23,10 @@
     "@types/react-dom": "19",
     "typescript": "5"
   },
-  "packageManager": "pnpm@9.15.1+sha256.9e534e70afef06374f6126b44bda5760947135ce16a30aef1010e965fb7e3e3e"
+  "packageManager": "pnpm@9.15.1+sha256.9e534e70afef06374f6126b44bda5760947135ce16a30aef1010e965fb7e3e3e",
+  "pnpm": {
+    "overrides": {
+      "tar@<7.5.19": ">=7.5.19"
+    }
+  }
 }
