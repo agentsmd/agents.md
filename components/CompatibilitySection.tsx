@@ -139,6 +139,12 @@ const agents: AgentEntry[] = [
     url: "https://jetbrains.com/junie",
     imageSrc: "/logos/junie.svg",
   },
+  {
+    name: "DeepSeek Harness",
+    from: "DeepSeek",
+    url: "https://www.deepseek.com/harness/en/",
+    imageSrc: "/logos/deepseek-harness.svg",
+  },
 ];
 
 const shuffleAgents = (items: AgentEntry[]) => {
