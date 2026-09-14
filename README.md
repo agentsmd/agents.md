@@ -32,6 +32,27 @@ Below is a minimal example of an AGENTS.md file:
 - Always run `pnpm lint` and `pnpm test` before committing.
 ```
 
+## Enterprise adoption patterns
+
+Teams adopting AGENTS.md across many repositories often need predictable structure
+without forcing every repo to have identical instructions. A practical approach is:
+
+1. Keep a short baseline AGENTS.md shared across repos (tooling, tests, PR expectations).
+2. Add local overrides only where workflows differ (for example, package-specific commands).
+3. Review AGENTS.md changes in PRs just like code changes.
+
+### Common anti-patterns
+
+- Very long AGENTS.md files that duplicate full project docs and go stale quickly.
+- Conflicting instructions between root and subdirectory AGENTS.md files.
+- Operational details that should live in source-controlled scripts instead of prose.
+
+### Suggested review cadence
+
+- Include AGENTS.md checks in normal code review.
+- Revalidate instructions after major toolchain, CI, or repository structure changes.
+- Keep examples minimal and current so coding agents can follow them deterministically.
+
 ## Website
 
 This repository also includes a basic Next.js website hosted at https://agents.md/
