@@ -47,3 +47,25 @@ that explains the project’s goals in a simple way, and featuring some examples
    pnpm run dev
    ```
 3. Open your browser and go to http://localhost:3000
+
+## Adjacent Idea: DELEGATION.md
+
+An adjacent idea I have been exploring is **DELEGATION.md**: a plain Markdown
+companion to `AGENTS.md` for describing what an agent is allowed to do.
+
+The rough split looks like this:
+
+- `AGENTS.md` tells an agent how to work
+- `DELEGATION.md` tells an agent what authority it has
+
+That can be useful once work starts moving across tools, sub-agents, or other
+trust boundaries and you want to make allowed actions, forbidden actions,
+delegatees, ceilings, and reauthorization rules visible in one place.
+
+There is a sample [`DELEGATION.md`](./DELEGATION.md) file in this fork.
+
+For a runtime provenance/enforcement layer, see **HDP (Human Delegation
+Provenance)**:
+
+- Paper: [arXiv:2604.04522](https://arxiv.org/abs/2604.04522)
+- Overview: [Helixar Labs - HDP](https://helixar.ai/about/labs/hdp/)
