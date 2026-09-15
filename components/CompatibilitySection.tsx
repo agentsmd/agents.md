@@ -139,16 +139,39 @@ const agents: AgentEntry[] = [
     url: "https://jetbrains.com/junie",
     imageSrc: "/logos/junie.svg",
   },
+  {
+    name: "OpenHands",
+    url: "https://docs.openhands.dev/overview/skills",
+    imageSrcLight: "/logos/openhands-light.svg",
+    imageSrcDark: "/logos/openhands-dark.svg",
+  },
 ];
 
-const shuffleAgents = (items: AgentEntry[]) => {
+function getDailySeed(): number {
+  const now = new Date();
+  return now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate();
+}
+
+/** Fisher–Yates shuffle with a deterministic seed (stable order for the day). */
+function seededShuffle(items: AgentEntry[], seed: number): AgentEntry[] {
   const copy = [...items];
+  let state = seed >>> 0;
+
+  const random = () => {
+    state = (Math.imul(1664525, state) + 1013904223) >>> 0;
+    return state / 0x100000000;
+  };
+
   for (let i = copy.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(random() * (i + 1));
     [copy[i], copy[j]] = [copy[j], copy[i]];
   }
+
   return copy;
-};
+}
+
+const shuffleAgents = (items: AgentEntry[]) =>
+  seededShuffle(items, getDailySeed());
 
 type LogoItemProps = AgentEntry & {
   variant?: "marquee" | "grid";
@@ -343,7 +366,7 @@ export default function CompatibilitySection() {
           id="supported-agents"
           className="mt-6 grid w-full grid-cols-2 gap-8 md:grid-cols-3"
         >
-          {agents.map((agent) => (
+          {shuffledAgents.map((agent) => (
             <LogoItem key={agent.name} {...agent} variant="grid" />
           ))}
         </div>
