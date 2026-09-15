@@ -86,6 +86,26 @@ export default function FAQ() {
         </>
       ),
     },
+    {
+      question: "How do I configure Claude Code?",
+      answer: (
+        <>
+          <p className="mb-2">
+            Claude Code reads <code>CLAUDE.md</code> rather than <code>AGENTS.md</code>. Import
+            your AGENTS.md from <code>CLAUDE.md</code> with a one-line directive so there is a
+            single source of truth both tools share:
+          </p>
+          <div className="w-full flex justify-center">
+            <CodeExample
+              code="@AGENTS.md"
+              compact
+              heightClass="min-h-[48px]"
+              centerVertically
+            />
+          </div>
+        </>
+      ),
+    },
   ];
 
   return (
