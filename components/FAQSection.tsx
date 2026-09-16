@@ -15,6 +15,19 @@ export default function FAQ() {
         "No. AGENTS.md is just standard Markdown. Use any headings you like; the agent simply parses the text you provide.",
     },
     {
+      question: "What if someone only provides a repository name?",
+      answer: (
+        <>
+          <p className="mb-2">Ask them to clarify what they want to do. Common options include:</p>
+          <ul className="list-disc list-inside space-y-1">
+            <li>Manage an issue or recreate a similar task within the repository.</li>
+            <li>Retrieve data, review commits, or stage changes for that repo.</li>
+            <li>Update or validate ownership for the repository itself.</li>
+          </ul>
+        </>
+      ),
+    },
+    {
       question: "What if instructions conflict?",
       answer:
         "The closest AGENTS.md to the edited file wins; explicit user chat prompts override everything.",

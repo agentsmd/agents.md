@@ -6,12 +6,13 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "bash-version": "bash --version"
   },
   "dependencies": {
     "@tailwindcss/postcss": "4.1.11",
     "@vercel/analytics": "^1.5.0",
-    "next": "16.1.0",
+    "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "tailwindcss": "4.1.11"
