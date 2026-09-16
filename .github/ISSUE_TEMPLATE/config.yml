@@ -1,0 +1,13 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Change the AGENTS.md format
+    url: https://github.com/aaif/project-proposals
+    about: >
+      Format changes bind every tool that reads AGENTS.md, so they are reviewed by the AAIF
+      Technical Committee rather than in this repository. Open an issue there.
+  - name: Foundation support
+    url: mailto:support@aaif.io
+    about: Governance, maintainership and Foundation-level questions.
+  - name: AAIF Discord
+    url: https://discord.com/invite/9zTwngHAMy
+    about: Chat with the wider Agentic AI Foundation community.

@@ -1,0 +1,50 @@
+name: Tool compatibility
+description: Report or request that a tool be listed as supporting AGENTS.md
+title: "Compatibility: <tool name>"
+labels: ["compatibility"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this if you are unsure whether a tool qualifies, or you are reporting that a
+        listed tool no longer works. If you already have the evidence and can edit the
+        list, open a pull request instead: it is faster. See
+        [CONTRIBUTING.md](https://github.com/agentsmd/agents.md/blob/main/CONTRIBUTING.md).
+  - type: input
+    id: tool
+    attributes:
+      label: Tool name and link
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence it reads AGENTS.md
+      description: >
+        Documentation, changelog entry, or a permalink to source showing the file being
+        discovered and read. A page that merely mentions AGENTS.md is not enough.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Released version where this works
+    validations:
+      required: true
+  - type: dropdown
+    id: nested
+    attributes:
+      label: Does it support nested AGENTS.md files?
+      options:
+        - "Yes"
+        - "No"
+        - "Unknown"
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirmation
+      options:
+        - label: The tool reads AGENTS.md in a released version today, not in a plan or a branch
+          required: true

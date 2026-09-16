@@ -47,3 +47,13 @@ that explains the project’s goals in a simple way, and featuring some examples
    pnpm run dev
    ```
 3. Open your browser and go to http://localhost:3000
+
+## Contributing
+
+AGENTS.md is a project of the [Agentic AI Foundation](https://aaif.io).
+
+- [CONTRIBUTING.md](CONTRIBUTING.md) covers how to add a tool to the compatibility list,
+  what gets merged quickly, and where format changes are decided.
+- [GOVERNANCE.md](GOVERNANCE.md) covers roles, how decisions are made, and how to become a
+  triager or maintainer.
+- [OWNERS.md](OWNERS.md) lists who currently reviews, and the Foundation escalation paths.
