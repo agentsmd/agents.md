@@ -29,6 +29,11 @@ export default function FAQ() {
       answer: "Absolutely. Treat AGENTS.md as living documentation.",
     },
     {
+      question: "Should AGENTS.md include all project documentation?",
+      answer:
+        "No. Keep AGENTS.md focused on instructions an agent should usually load up front. Link to deeper docs for details that are only relevant to specific tasks.",
+    },
+    {
       question: "How do I migrate existing docs to AGENTS.md?",
       answer: (
         <>

@@ -32,6 +32,17 @@ export default function HowToUseSection() {
       body: "Commit messages or pull request guidelines, security gotchas, large datasets, deployment steps: anything you’d tell a new teammate belongs here too.",
     },
     {
+      title: "Keep it focused",
+      body: (
+        <>
+          AGENTS.md is loaded into an agent’s context, so treat every line as part
+          of the context budget. Prefer durable, task-relevant guidance over long
+          overviews, and link to deeper docs when the agent only needs them for
+          specific tasks.
+        </>
+      ),
+    },
+    {
       title: "Large monorepo? Use nested AGENTS.md files for subprojects",
       body: (
         <>
