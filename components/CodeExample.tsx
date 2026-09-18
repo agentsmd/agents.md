@@ -56,6 +56,12 @@ name>"\`.
 <project_name>\` to be sure ESLint and TypeScript rules still pass.
 - Add or update tests for the code you change, even if nobody asked.
 
+## Verification evidence
+- Run every command you cite from a clean checkout when practical.
+- In the PR description, list the exact commands you ran and whether they passed.
+- If a check could not run, say why and what remains unverified.
+- Do not claim a check passed based only on reading the code or another agent's report.
+
 ## PR instructions
 - Title format: [<project_name>] <Title>
 - Always run \`pnpm lint\` and \`pnpm test\` before committing.`;
