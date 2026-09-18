@@ -47,3 +47,19 @@ that explains the project’s goals in a simple way, and featuring some examples
    pnpm run dev
    ```
 3. Open your browser and go to http://localhost:3000
+
+## Batch source processing helper
+
+This repository includes `batch_source.py` for batching source files, running a pilot batch, retrying failed batches, and producing one merged output file.
+
+Example:
+
+```bash
+python batch_source.py \
+  ./components \
+  ./tmp/components-merged.txt \
+  --pattern "*.tsx" \
+  --batch-size 5 \
+  --max-bytes 120000 \
+  --retries 3
+```

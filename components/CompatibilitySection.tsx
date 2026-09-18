@@ -269,11 +269,13 @@ export default function CompatibilitySection() {
   const [showGrid, setShowGrid] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setShuffledAgents(shuffleAgents(agents));
   }, []);
 
   useEffect(() => {
     if (showGrid) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsInView(false);
       return;
     }
