@@ -35,6 +35,11 @@ const agents: AgentEntry[] = [
     imageSrc: "/logos/cursor.svg",
   },
   {
+    name: "Cline",
+    url: "https://cline.bot",
+    imageSrc: "/logos/cline-light.svg",
+  },
+  {
     name: "Factory",
     url: "https://factory.ai",
     imageSrc: "/logos/factory.svg",
