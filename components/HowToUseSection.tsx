@@ -32,6 +32,10 @@ export default function HowToUseSection() {
       body: "Commit messages or pull request guidelines, security gotchas, large datasets, deployment steps: anything you’d tell a new teammate belongs here too.",
     },
     {
+      title: "Add local instructions with .agents.md",
+      body: "Keep personal rules in a sibling .agents.md file. Agents read both files, give priority to .agents.md, and apply the same \"closest file wins\" hierarchy.",
+    },
+    {
       title: "Large monorepo? Use nested AGENTS.md files for subprojects",
       body: (
         <>

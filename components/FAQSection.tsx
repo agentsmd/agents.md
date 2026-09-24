@@ -16,8 +16,8 @@ export default function FAQ() {
     },
     {
       question: "What if instructions conflict?",
-      answer:
-        "The closest AGENTS.md to the edited file wins; explicit user chat prompts override everything.",
+      answer: 
+        ".agents.md beats conflicting guidance in AGENTS.md. The closest instruction file to the edited file wins; explicit user chat prompts override everything.",
     },
     {
       question: "Will the agent run testing commands found in AGENTS.md automatically?",
