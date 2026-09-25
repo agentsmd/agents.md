@@ -1,0 +1,30 @@
+# AGENTS.md
+
+**AGENTS.md** is a simple, open format for guiding AI coding agents, used by over 20,000 open-source projects. Think of it as a **README for agents** - a dedicated, predictable place to provide context and instructions to help AI coding agents work effectively on your project.
+
+## Key Links
+
+- **Main Website**: https://agents.md
+- **GitHub Repository**: https://github.com/openai/agents.md
+- **Search Examples**: [20k+ AGENTS.md files on GitHub](https://github.com/search?q=path%3AAGENTS.md&type=code)
+- **OpenAI Codex Example**: https://github.com/openai/codex/blob/main/AGENTS.md
+
+## What is AGENTS.md?
+
+AGENTS.md emerged from collaborative efforts across the AI software development ecosystem, including OpenAI Codex, Amp, Jules from Google, Cursor, and Factory. It complements README.md files by containing the extra, sometimes detailed context coding agents need: build steps, tests, and conventions that might clutter a README or aren't relevant to human contributors.
+
+## Supported Tools & Agents
+
+Compatible with a growing ecosystem of AI coding agents and tools including:
+- OpenAI Codex
+- Cursor
+- GitHub Copilot
+- Aider
+- Gemini CLI
+- Amp
+- Jules (Google)
+- Factory
+- Zed
+- And many more
+
+AGENTS.md uses standard Markdown format with no required fields - agents simply parse the text you provide.

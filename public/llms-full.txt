@@ -1,0 +1,175 @@
+# AGENTS.md - Complete Documentation
+
+## Overview
+
+**AGENTS.md** is a simple, open format for guiding AI coding agents. Think of it as a **README for agents** - a dedicated, predictable place to provide the context and instructions to help AI coding agents work effectively on your project.
+
+Used by over 20,000 open-source projects, AGENTS.md emerged from collaborative efforts across the AI software development ecosystem, including OpenAI Codex, Amp, Jules from Google, Cursor, and Factory.
+
+## Core Concept
+
+### What is AGENTS.md?
+
+AGENTS.md complements README.md files by containing the extra, sometimes detailed context coding agents need: build steps, tests, and conventions that might clutter a README or aren't relevant to human contributors.
+
+### Why AGENTS.md?
+
+- **Give agents a clear, predictable place for instructions** - Agents know exactly where to look for project-specific guidance
+- **Keep READMEs concise and focused on human contributors** - Separate concerns between human and agent documentation
+- **Provide precise, agent-focused guidance** - Complements existing README and docs with agent-specific context
+
+Rather than introducing another proprietary file, the format uses a name and structure that could work for anyone building or using coding agents.
+
+## How to Use AGENTS.md
+
+### 1. Add AGENTS.md
+Create an AGENTS.md file at the root of the repository. Most coding agents can even scaffold one for you if you ask nicely.
+
+### 2. Cover What Matters
+Add sections that help an agent work effectively with your project. Popular choices include:
+- Project overview
+- Build and test commands  
+- Code style guidelines
+- Testing instructions
+- Security considerations
+
+### 3. Add Extra Instructions
+Include details like:
+- Commit message guidelines
+- Pull request templates
+- Security gotchas
+- Large dataset information
+- Deployment steps
+- Anything you'd tell a new teammate
+
+### 4. Large Monorepo? Use Nested AGENTS.md Files
+Place another AGENTS.md inside each package. Agents automatically read the nearest file in the directory tree, so the closest one takes precedence and every subproject can ship tailored instructions. For example, at time of writing the main OpenAI repo has 88 AGENTS.md files.
+
+## Format and Structure
+
+### File Format
+- **Standard Markdown**: AGENTS.md uses regular Markdown syntax
+- **No Required Fields**: Use any headings you like; the agent simply parses the text you provide
+- **Flexible Structure**: Organize information in whatever way makes sense for your project
+
+### Example Structure
+
+```markdown
+# Sample AGENTS.md file
+
+## Dev environment tips
+- Use `pnpm dlx turbo run where <project_name>` to jump to a package instead of scanning with `ls`.
+- Run `pnpm install --filter <project_name>` to add the package to your workspace so Vite, ESLint, and TypeScript can see it.
+- Use `pnpm create vite@latest <project_name> -- --template react-ts` to spin up a new React + Vite package with TypeScript checks ready.
+- Check the name field inside each package's package.json to confirm the right name—skip the top-level one.
+
+## Testing instructions
+- Find the CI plan in the .github/workflows folder.
+- Run `pnpm turbo run test --filter <project_name>` to run every check defined for that package.
+- From the package root you can just call `pnpm test`. The commit should pass all tests before you merge.
+- To focus on one step, add the Vitest pattern: `pnpm vitest run -t "<test name>"`.
+- Fix any test or type errors until the whole suite is green.
+- After moving files or changing imports, run `pnpm lint --filter <project_name>` to be sure ESLint and TypeScript rules still pass.
+- Add or update tests for the code you change, even if nobody asked.
+
+## PR instructions
+- Title format: [<project_name>] <Title>
+- Always run `pnpm lint` and `pnpm test` before committing.
+```
+
+## Configuration for Specific Tools
+
+### Aider Configuration
+Configure Aider to use AGENTS.md in `.aider.conf.yml`:
+```yaml
+read: AGENTS.md
+```
+
+### Gemini CLI Configuration  
+Configure Gemini CLI to use AGENTS.md in `.gemini/settings.json`:
+```json
+{
+  "contextFileName": "AGENTS.md"
+}
+```
+
+## Frequently Asked Questions
+
+### Are there required fields?
+No. AGENTS.md is just standard Markdown. Use any headings you like; the agent simply parses the text you provide.
+
+### What if instructions conflict?
+The closest AGENTS.md to the edited file wins; explicit user chat prompts override everything.
+
+### Will the agent run testing commands found in AGENTS.md automatically?
+Yes—if you list them. The agent will attempt to execute relevant programmatic checks and fix failures before finishing the task.
+
+### Can I update it later?
+Absolutely. Treat AGENTS.md as living documentation.
+
+### How do I migrate existing docs to AGENTS.md?
+Rename existing files to AGENTS.md and create symbolic links for backward compatibility:
+```bash
+mv AGENT.md AGENTS.md && ln -s AGENTS.md AGENT.md
+```
+
+## Compatible Tools and Agents
+
+AGENTS.md works across a growing ecosystem of AI coding agents and tools:
+
+- **OpenAI Codex** - https://openai.com/codex/
+- **Amp** - https://ampcode.com
+- **Jules** (Google) - https://jules.google
+- **Cursor** - https://cursor.com
+- **Factory** - https://factory.ai
+- **RooCode** - https://roocode.com
+- **Aider** - https://aider.chat/docs/usage/conventions.html#always-load-conventions
+- **Gemini CLI** (Google) - https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/configuration.md#available-settings-in-settingsjson
+- **Kilo Code** - https://kilocode.ai/
+- **opencode** - https://opencode.ai/docs/rules/
+- **Phoenix** - https://phoenix.new/
+- **Zed** - https://zed.dev/docs/ai/rules
+- **Semgrep** - https://semgrep.dev
+- **Warp** - https://docs.warp.dev/knowledge-and-collaboration/rules#project-scoped-rules-1
+- **GitHub Copilot** coding agent - https://gh.io/coding-agent-docs
+- **Ona** - https://ona.com
+
+## Real-World Examples
+
+Notable projects using AGENTS.md include:
+- **openai/codex** - General-purpose CLI tooling for AI coding agents
+- **apache/airflow** - Platform to programmatically author, schedule, and monitor workflows
+- **temporalio/sdk-java** - Java SDK for Temporal, workflow orchestration defined in code
+- **PlutoLang/Pluto** - A superset of Lua 5.4 with a focus on general-purpose programming
+
+View 20k+ examples: https://github.com/search?q=path%3AAGENTS.md&type=code
+
+## Best Practices
+
+### Content Guidelines
+1. **Be Specific**: Include exact commands and file paths
+2. **Focus on Agent Needs**: Include context that automated tools require
+3. **Keep It Current**: Treat as living documentation that evolves with your project
+4. **Test Instructions**: Ensure listed commands actually work
+5. **Security First**: Include security considerations and constraints
+
+### Organization Tips
+1. **Use Clear Headings**: Organize information logically
+2. **Prioritize Common Tasks**: Put frequently needed information first
+3. **Include Examples**: Show concrete examples of expected patterns
+4. **Link to Resources**: Reference additional documentation when helpful
+
+### Maintenance
+1. **Update Regularly**: Keep instructions current with project changes
+2. **Validate Commands**: Ensure all listed commands work correctly
+3. **Gather Feedback**: Learn from how agents use your instructions
+4. **Version Control**: Track changes like any other important documentation
+
+## Community and Contributions
+
+AGENTS.md is committed to maintaining and evolving as an open format that benefits the entire developer community, regardless of which coding agent you use. If you're building or using coding agents and find this helpful, feel free to adopt it.
+
+### Links
+- **Website**: https://agents.md
+- **GitHub Repository**: https://github.com/openai/agents.md
+- **Community Examples**: https://github.com/search?q=path%3AAGENTS.md&type=code
