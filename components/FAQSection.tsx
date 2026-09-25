@@ -86,6 +86,26 @@ export default function FAQ() {
         </>
       ),
     },
+    {
+      question: "How do I configure Claude Code?",
+      answer: (
+        <>
+          <p className="mb-2">
+            Claude Code allows multiple <b>Memory</b> files <br />
+            You can refer to another file in CLAUDE.md with <code>@</code>{'{'}filepath{'}'} <br />
+            Configure Claude Code to use AGENTS.md in <code>CLAUDE.md</code>:
+          </p>
+          <div className="w-full flex justify-center">
+            <CodeExample
+              code='@AGENTS.md'
+              compact
+              heightClass="min-h-[48px]"
+              centerVertically
+            />
+          </div>
+        </>
+      ),
+    },
   ];
 
   return (
