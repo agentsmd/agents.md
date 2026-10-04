@@ -139,6 +139,11 @@ const agents: AgentEntry[] = [
     url: "https://jetbrains.com/junie",
     imageSrc: "/logos/junie.svg",
   },
+  {
+    name: "Workshop",
+    url: "https://workshop.ai",
+    imageSrc: "/logos/workshop.svg",
+  },
 ];
 
 const shuffleAgents = (items: AgentEntry[]) => {
