@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <mask id="ring-cut">
+      <rect width="512" height="512" fill="black"/>
+      <circle cx="244" cy="268" r="196" fill="white"/>
+      <circle cx="220" cy="288" r="104" fill="black"/>
+      <rect x="340" y="64" width="112" height="112" fill="black"/>
+    </mask>
+  </defs>
+  <rect width="512" height="512" fill="#06151b" mask="url(#ring-cut)"/>
+  <rect x="404" y="48" width="72" height="72" rx="5" fill="#ffb000"/>
+</svg>
