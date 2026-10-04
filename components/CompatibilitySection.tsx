@@ -139,6 +139,13 @@ const agents: AgentEntry[] = [
     url: "https://jetbrains.com/junie",
     imageSrc: "/logos/junie.svg",
   },
+  {
+    name: "Orbi",
+    from: "Orbi",
+    url: "https://orbi.build/?ref=agents-md",
+    imageSrcLight: "/logos/orbi-light.svg",
+    imageSrcDark: "/logos/orbi-dark.svg",
+  },
 ];
 
 const shuffleAgents = (items: AgentEntry[]) => {
