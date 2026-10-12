@@ -42,6 +42,11 @@ const REPOS: RepoCardProps[] = [
     description: "A superset of Lua 5.4 with a focus on general-purpose programming.",
     language: "C++",
   },
+  {
+    name: "ego-protocol/tbd-vote-cli",
+    description: "Solana prediction market with an AGENTS.md-driven agent CLI for trading opinion polls.",
+    language: "TypeScript",
+  },
 ];
 
 interface ExampleListSectionProps {
