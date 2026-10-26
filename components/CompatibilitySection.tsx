@@ -139,6 +139,11 @@ const agents: AgentEntry[] = [
     url: "https://jetbrains.com/junie",
     imageSrc: "/logos/junie.svg",
   },
+  {
+    name: "Cline",
+    url: "https://docs.cline.bot/customization/cline-rules",
+    imageSrc: "/logos/cline.svg",
+  },
 ];
 
 const shuffleAgents = (items: AgentEntry[]) => {
