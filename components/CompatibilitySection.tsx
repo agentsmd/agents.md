@@ -139,6 +139,11 @@ const agents: AgentEntry[] = [
     url: "https://jetbrains.com/junie",
     imageSrc: "/logos/junie.svg",
   },
+  {
+    name: "Uno",
+    url: "https://unocode.motiontic.com/#context",
+    imageSrc: "/logos/uno.svg",
+  },
 ];
 
 const shuffleAgents = (items: AgentEntry[]) => {
