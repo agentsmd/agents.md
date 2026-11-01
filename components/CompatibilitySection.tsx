@@ -134,6 +134,11 @@ const agents: AgentEntry[] = [
     imageSrc: "/logos/augment.svg",
   },
   {
+    name: "Wavefunction",
+    url: "https://www.wavefunction.si",
+    imageSrc: "/logos/wavefunction.svg",
+  },
+  {
     name: "Junie",
     from: "JetBrains",
     url: "https://jetbrains.com/junie",
