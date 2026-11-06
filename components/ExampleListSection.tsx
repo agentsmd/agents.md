@@ -37,11 +37,6 @@ const REPOS: RepoCardProps[] = [
       "Java SDK for Temporal, workflow orchestration defined in code.",
     language: "Java",
   },
-  {
-    name: "PlutoLang/Pluto",
-    description: "A superset of Lua 5.4 with a focus on general-purpose programming.",
-    language: "C++",
-  },
 ];
 
 interface ExampleListSectionProps {
