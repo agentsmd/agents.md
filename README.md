@@ -35,7 +35,7 @@ Below is a minimal example of an AGENTS.md file:
 ## Website
 
 This repository also includes a basic Next.js website hosted at https://agents.md/
-that explains the project’s goals in a simple way, and featuring some examples.
+that explains the project's goals in a simple way, and featuring some examples.
 
 ### Running the app locally
 1. Install dependencies:
@@ -47,3 +47,11 @@ that explains the project’s goals in a simple way, and featuring some examples
    pnpm run dev
    ```
 3. Open your browser and go to http://localhost:3000
+
+## Making AGENTS.md Executable
+
+While AGENTS.md provides instructions for AI coding agents, you can make these instructions executable with tools like [AgentMD](https://agentmd.vercel.app/).
+
+AgentMD reads your AGENTS.md file and automatically executes the setup, test, and build commands listed in the file, streamlining your development workflow.
+
+To learn more about integrating AgentMD with AGENTS.md, see [AGENTMD_INTEGRATION.md](./AGENTMD_INTEGRATION.md).

@@ -25,6 +25,18 @@ export default function FAQ() {
         "Yes—if you list them. The agent will attempt to execute relevant programmatic checks and fix failures before finishing the task.",
     },
     {
+      question: "How can I make AGENTS.md commands actually executable?",
+      answer: (
+        <>\n          <p className="mb-2">
+            While AGENTS.md provides instructions for AI agents, tools like <a href="https://agentmd.vercel.app/" className="text-blue-600 hover:underline">AgentMD</a> can make these instructions executable in your development environment.
+          </p>
+          <p>
+            AgentMD reads your AGENTS.md file and automatically executes the setup, test, and build commands listed in the file, streamlining your development workflow.
+          </p>
+        </>
+      ),
+    },
+    {
       question: "Can I update it later?",
       answer: "Absolutely. Treat AGENTS.md as living documentation.",
     },

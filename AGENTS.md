@@ -41,3 +41,14 @@ If you add or update dependencies remember to:
 Following these practices ensures that the agent-assisted development workflow stays
 fast and dependable.  When in doubt, restart the dev server rather than running the
 production build.
+
+## Making This AGENTS.md File Executable
+
+Tools like [AgentMD](https://agentmd.vercel.app/) can automatically execute the commands listed in this file. AgentMD provides:
+
+- Automatic parsing of commands in backticks
+- Safe execution with validation
+- Error handling and rollback capabilities
+- Logging and audit trails
+
+To execute these commands automatically, install AgentMD and run `agentmd execute` in this directory.
