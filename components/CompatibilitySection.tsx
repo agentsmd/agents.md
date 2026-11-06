@@ -35,6 +35,13 @@ const agents: AgentEntry[] = [
     imageSrc: "/logos/cursor.svg",
   },
   {
+    name: "Command Code",
+    url: "https://commandcode.ai",
+    imageSrcLight: "/logos/command-code-light.svg",
+    imageSrcDark: "/logos/command-code-dark.svg",
+    from: 'Langbase'
+  },
+  {
     name: "Factory",
     url: "https://factory.ai",
     imageSrc: "/logos/factory.svg",
