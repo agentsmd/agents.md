@@ -50,6 +50,11 @@ const agents: AgentEntry[] = [
     imageSrc: "/logos/aider.svg",
   },
   {
+    name: "Windsurf",
+    url: "https://windsurf.com/changelog#patch-fixes-and-improvements",
+    imageSrc: "/logos/windsurf.svg",
+  },
+  {
     name: "Gemini CLI",
     url: "https://github.com/google-gemini/gemini-cli/blob/main/docs/get-started/configuration.md#available-settings-in-settingsjson",
     from: "Google",
