@@ -36,12 +36,12 @@ const agents: AgentEntry[] = [
   },
   {
     name: "Factory",
-    url: "https://factory.ai",
+    url: "https://factory.com",
     imageSrc: "/logos/factory.svg",
   },
   {
     name: "RooCode",
-    url: "https://roocode.com",
+    url: "https://github.com/RooCodeInc/Roo-Code",
     imageSrc: "/logos/roocode.svg",
   },
   {
@@ -51,18 +51,18 @@ const agents: AgentEntry[] = [
   },
   {
     name: "Gemini CLI",
-    url: "https://github.com/google-gemini/gemini-cli/blob/main/docs/get-started/configuration.md#available-settings-in-settingsjson",
+    url: "https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/gemini-md.md",
     from: "Google",
     imageSrc: "/logos/gemini.svg",
   },
   {
     name: "goose",
-    url: "https://github.com/block/goose",
+    url: "https://github.com/aaif-goose/goose",
     imageSrc: "/logos/goose.svg",
   },
   {
     name: "Kilo Code",
-    url: "https://kilocode.ai/",
+    url: "https://kilo.ai/",
     imageSrc: "/logos/kilo-code.svg",
   },
   {
@@ -77,7 +77,7 @@ const agents: AgentEntry[] = [
   },
   {
     name: "Zed",
-    url: "https://zed.dev/docs/ai/rules",
+    url: "https://zed.dev/docs/ai/instructions",
     imageSrc: "/logos/zed.svg",
   },
   {
@@ -138,6 +138,71 @@ const agents: AgentEntry[] = [
     from: "JetBrains",
     url: "https://jetbrains.com/junie",
     imageSrc: "/logos/junie.svg",
+  },
+  {
+    name: "Claude Code",
+    from: "Anthropic",
+    url: "https://code.claude.com/docs/en/memory",
+    imageSrc: "/logos/claude-code.svg",
+  },
+  {
+    name: "Cline",
+    url: "https://docs.cline.bot/features/cline-rules",
+    imageSrc: "/logos/cline.svg",
+  },
+  {
+    name: "Qwen Code",
+    from: "Alibaba",
+    url: "https://github.com/QwenLM/qwen-code",
+    imageSrc: "/logos/qwen-code.svg",
+  },
+  {
+    name: "Continue",
+    url: "https://docs.continue.dev/customize/deep-dives/rules",
+    imageSrc: "/logos/continue.svg",
+  },
+  {
+    name: "Kiro",
+    from: "AWS",
+    url: "https://kiro.dev/docs/steering/",
+    imageSrc: "/logos/kiro.svg",
+  },
+  {
+    name: "Trae",
+    url: "https://docs.trae.ai/ide/rules",
+    imageSrc: "/logos/trae.svg",
+  },
+  {
+    name: "Vibe",
+    from: "Mistral AI",
+    url: "https://github.com/mistralai/mistral-vibe",
+    imageSrc: "/logos/mistral-vibe.svg",
+  },
+  {
+    name: "OpenHands",
+    url: "https://docs.openhands.dev/overview/skills/repo",
+    imageSrc: "/logos/openhands.svg",
+  },
+  {
+    name: "Crush",
+    from: "Charm",
+    url: "https://github.com/charmbracelet/crush",
+    imageSrc: "/logos/crush.png",
+  },
+  {
+    name: "CodeRabbit",
+    url: "https://docs.coderabbit.ai/knowledge-base/code-guidelines",
+    imageSrc: "/logos/coderabbit.svg",
+  },
+  {
+    name: "CoStrict",
+    url: "https://github.com/zgsm-ai/costrict",
+    imageSrc: "/logos/costrict.svg",
+  },
+  {
+    name: "Firebender",
+    url: "https://docs.firebender.com/api-reference/agents",
+    imageSrc: "/logos/firebender.svg",
   },
 ];
 
